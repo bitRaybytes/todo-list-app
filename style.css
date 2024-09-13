@@ -1,0 +1,267 @@
+:root {
+  --background: #2e2e2e;
+  --primary-color: rgb(9, 213, 138);
+  --secondary-color: #36d99d;
+  --tertiar-clr: #318164;
+  --accent-color: rgba(48, 242, 171, .3);
+  --text-color-1: #f9f9f9;
+  --text-color-2: black;
+  --warning-clr: #F20505;
+}
+
+body{
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  background-color: var(--background);
+  color: var(--text-color-1);
+
+  display: grid;
+  grid:
+  /* first define the colums than with slash u can set up the rows f. e. 100px 100px / 100px 100px */
+  "header header header header" auto
+  "...... lists active ......" auto / 1fr minmax(100px, 300px) 1fr minmax(250px, 500px);
+}
+
+.title{
+  grid-area: header;
+  text-align: center;
+  font-size: calc(7vw - 0.6em);
+  font-weight: 900;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  margin: -0.2em 0 0.5em;
+}
+
+.all-tasks{
+  grid-area: lists;
+}
+
+.task-list{
+  font-size: 1.2rem;
+  line-height: 1.7;
+  list-style-type: circle;
+  padding-left: 1.1em;
+
+}
+
+.list-name{
+  cursor: pointer;
+}
+.list-name:hover{
+  opacity: 0.7;
+}
+
+form{
+  display: flex;
+}
+
+.btn{
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.btn.create{
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: 0.25em;
+  transition: opacitiy 250s ease-in;
+}
+
+.btn.create:hover{
+  opacity: .7;
+}
+.btn.delete{
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  font-size: 1rem;
+  transition: color 200ms;
+}
+
+.btn.delete:hover{
+  color: var(--warning-clr);
+}
+
+.new{
+  background: transparent;
+  border: 0;
+  color: var(--accent-color);
+  border-bottom: 1px solid currentColor;
+  font-size: inherit;
+  outline: none;
+  padding: 0.25em;
+  transition: borderbottom 150ms ease-in;
+  order: 2;
+}
+
+.new.placeholder{
+  opacity: 0.4;
+}
+.new:focus{
+  border-bottom-width: 3px;
+}
+
+.new:focus::placeholder{
+  opacity: 0.15;
+}
+
+.new.list{
+  font-size: 1.1rem;
+}
+.new.task{
+  margin-bottom: 0;
+}
+
+.active-list{
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.todo-list{
+  --spacer: 2rem;
+  
+  grid-area: active;
+  background: #727272;
+  color: var(--text-color-2);
+  box-shadow: 0 3px 5px var(--tertiar-clr);
+}
+
+.todo-header{
+  padding: var(--spacer);
+  display: flex;
+  background: var(--tertiar-clr);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-title{
+  margin: 0 1rem 0 0 ;
+}
+
+.task-count{
+  margin: 0;
+  font-size: 1rem;
+}
+
+.todo-body{
+  padding: var(--spacer);
+  position: relative;
+}
+
+.new-task-creator .create{
+  color: blue;
+}
+
+[type="checkbox"]{
+  opacity: 0;
+  position: absolute;
+}
+
+.task label {
+  display: inlie-flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1.5em;
+
+}
+.task{
+  position: relative;
+}
+.task label::after{
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.1;
+}
+
+.custom-checkbox{
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  margin-right: var(--size);
+  transition: transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox, 
+[type="checkbox"]:focus + label .custom-checkbox{
+  transform: scale(1.2);
+  color: white;
+}
+
+[type="checkbox"]:checked + label .custom-checkbox{
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: inset 0 0 20px white;
+}
+
+
+[type="checkbox"]:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.delete-stuff{
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+  color: white;
+}
+
+@media screen and (max-width: 992px) {
+  body{
+    font-size: 1.2rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+.title{
+  font-size: calc(7vw - .6rem);
+}
+  .todo-list {
+    margin: 50px 15px;
+    width: auto;
+    height: auto;
+    
+  }
+
+  .all-tasks{
+    font-size: 1rem;
+    margin-left: 15px;
+    /* justify-content: center; */
+  }
+  
+}
